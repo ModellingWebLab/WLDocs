@@ -79,7 +79,7 @@ WL2 does _not_ include initial preprocessing such as capacitance artefact remova
 It _does_ include secondary preprocessing such as calculating IV curves from (clean up) current recordings.
 To allow initial preprocessing to be inspected and/or re-done, we would ideally store (1) cleaned up, annotated data in an approved exchange format, and (2) free-form raw data along with pre-processing code (e.g. proprietary data formats and matlab scripts).
 
-Further pre and post-processing currently happens via functional curation (see [Protocols](#Protocols)).
+Further pre and post-processing currently happens via functional curation (see [Protocols](#protocols)).
 
 
 ## Simulations
