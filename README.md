@@ -56,6 +56,9 @@ It would also be great to move beyond shared variable names, and start documenti
 Once we have a way to reference our models and data sets, we should also be able to add _weak provenance data_, such as `ModelX:VariableY is_derived_from DataSetZ` or `ModelX:Component1 is_inherited_from ModelY:Component2` or `is_adapted_from`.
 The fitting specification (see **TODO**) will provide _strong provenance data_, in the form of a complete description of how to obtain a parameter value from a model, protocol, and data set.
 
+Linking models to annotated data would automatically solve the problem of annotating models with e.g. species info (we could even say things like "27% human" if the annotations were really complete).
+See [previous feedback](https://bitbucket.org/joncooper/fcweb/issues/99/sort-models-by-species).
+
 ### Stimulus current
 
 Typically, the CellML version of a model includes a stimulus current.
@@ -93,6 +96,12 @@ The Minimum Information About a Simulation Experiment (MIASE) project describes 
 
 The current Functional Curation protocols rely on a cardiac specific and a cardiac-non-specific library of functions (written in FC syntax).
 If we continue down this road these need to be documented and stored somewhere as some kind of standard library.
+
+Previous feedback: [Importing partial protocols](https://bitbucket.org/joncooper/fcweb/issues/56/allow-import-of-protocols).
+
+### Visualisation
+
+Previous feedback: [It would be cool to (automatically?) generate flow diagrams for protocols.](https://bitbucket.org/joncooper/fcweb/issues/83/support-facilitate-richer-documentation-of).
 
 
 
@@ -214,4 +223,25 @@ These will take the form of a uniform resource identifier ([URI](https://en.wiki
 We will allow all entities (models, protocols, data sets) to be either private, shared with a limited audience, or fully public.
 
 **Point of action:** What will the limited audience be? Groups etc.? Or simply logged in users or a big group of admin/power users? Should we start thinking about the case where even admins shouldn't have (easy) access to all data?
+
+[Previous feedback on limited audience sharing](https://bitbucket.org/joncooper/fcweb/issues/68/allow-sharing-entities-with-specific-users) and [this](https://bitbucket.org/joncooper/fcweb/issues/107/allow-admins-to-unpublish-models) and [this](https://bitbucket.org/joncooper/fcweb/issues/108/give-users-some-way-to-request-new).
+
+
+## Comments and discussion
+
+At one point, we mentioned it would be nice to allow comments / discussion threads of all entities.
+I still like this idea!
+(Would have to refer to a repo though, not a version within a repo).
+This also ties in with "exposures", or homepages for each entity where users can see the different versions etc.
+
+
+## REST API
+
+WL1 provides a hidden [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer) to allow other services to communicate with it.
+WL2 should keep this feature, but extend and document it.
+
+
+
+
+
 
