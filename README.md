@@ -1,7 +1,7 @@
 # The Cardiac Electrophysiology Web Lab
 
-* [Click here for links to code, prototypes, and more information](links.md).
-* [Click here for the WL1/WL2/Web Lab terminology disambiguation](terminology.md).
+- [Click here for links to code, prototypes, and more information](links.md).
+- [Click here for the WL1/WL2/Web Lab terminology disambiguation](terminology.md).
 
 _The following document describes the **intended** features of the new web lab (2018-05-21)._
 
@@ -38,16 +38,16 @@ We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/r
 
 **Point of action**: We need to either find a community ontology, or work towards standardising our one (e.g. move from chaste to its own repo, get some input from others, given them access etc.).
 
-Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
-Note 2: The XML namespace for the annotations is https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata (not a link!).
+- Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
+- Note 2: The XML namespace for the annotations is https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata (not a link!).
 
 ### Stimulus current
 
 Typically, the CellML version of a model includes a stimulus current.
 This is essential a default protocol, and so it can be argued this should not be part of a model.
 
-Note 1: The same holds for physical constants and physiological parameters such as temperature or membrane area: in a modular set-up these should really not be part of the _cell_ model.
-Note 2: In addition, most stimulus protocols are discontinuous, and consist of a small jump of 0.5, 1, or 2ms in a 1000ms period.
+- Note 1: The same holds for physical constants and physiological parameters such as temperature or membrane area: in a modular set-up these should really not be part of the _cell_ model.
+- Note 2: In addition, most stimulus protocols are discontinuous, and consist of a small jump of 0.5, 1, or 2ms in a 1000ms period.
 Unless the solver somehow knows when these jumps are, simulations need to be run with a maximum step size of e.g. 1ms.
 This is inefficient during the systolic/refractory phase, where steps of over 100ms could otherwise be made.
 
