@@ -8,18 +8,21 @@ WL2 Demo versions
 
 WL1 Live versions
 
-* WL1 Pretty link: https://chaste.cs.ox.ac.uk/WebLab, which redirects to: https://travis.cs.ox.ac.uk/FunctionalCuration/
+* WL2 demo version: https://scrambler.cs.ox.ac.uk/
+* WL1 pretty link: https://chaste.cs.ox.ac.uk/WebLab, which redirects to: https://travis.cs.ox.ac.uk/FunctionalCuration/
 * WL1-fitting prototype: https://muck.cs.ox.ac.uk/FunctionalCuration/
 * WL1-electrochemistry prototype: https://lofty.cs.ox.ac.uk/FunctionalCuration/
-* WL2 Demo version: https://scrambler.cs.ox.ac.uk/
 
-Code
+WL2 Code
 
 * All new code: https://github.com/ModellingWebLab
-* WL1 code: https://github.com/ModellingWebLab/fcweb
 * WL2 Django front-end: https://github.com/ModellingWebLab/WebLab
 * WL2 issues: https://github.com/ModellingWebLab/project_issues
 * WL2 project management: https://waffle.io/ModellingWebLab/project_issues
+
+WL1 Code
+
+* WL1 code: https://github.com/ModellingWebLab/fcweb
 * WL1-fitting prototype code 1: https://github.com/ModellingWebLab/fcweb/tree/cardiac-fitting
 * WL1-fitting prototype code 2: https://chaste.cs.ox.ac.uk/trac/browser/chaste/projects/AidanDaly
 * WL1-electrochemistry prototype code: https://bitbucket.org/joncooper/fcweb/branch/echem
