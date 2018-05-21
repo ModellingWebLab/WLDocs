@@ -33,7 +33,7 @@ In the current implementation, models are stored on the website, but we'd like t
 
 The WL2 uses GIT for version control of models, protocols, and data sets: See #version_control.
 
-**Question:** Jon, how does this mesh with our git storage ideas? Would our _view_ of a model (e.g. an identifier, annotations, and a link to an external cellml source) be a locally version-controlled entity?
+**Question:** _Jon, how does this mesh with our git storage ideas? Would our **view** of a model (e.g. an identifier, annotations, and a link to an external cellml source) be a locally version-controlled entity?_
 
 ### Annotation
 
@@ -54,7 +54,7 @@ We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/r
 
 It would also be great to move beyond shared variable names, and start documenting model provenance, using _relations_ to (oxmeta?) variables, such as `is_parameter_for`.
 Once we have a way to reference our models and data sets, we should also be able to add _weak provenance data_, such as `ModelX:VariableY is_derived_from DataSetZ` or `ModelX:Component1 is_inherited_from ModelY:Component2` or `is_adapted_from`.
-The fitting specification (see **TODO**) will provide _strong provenance data_, in the form of a complete description of how to obtain a parameter value from a model, protocol, and data set.
+The fitting specification (see #fitting) will provide _strong provenance data_, in the form of a complete description of how to obtain a parameter value from a model, protocol, and data set.
 
 Linking models to annotated data would automatically solve the problem of annotating models with e.g. species info (we could even say things like "27% human" if the annotations were really complete).
 See [previous feedback](https://bitbucket.org/joncooper/fcweb/issues/99/sort-models-by-species).
@@ -199,22 +199,22 @@ This means we'll probably need some sort of offline component for people to expe
 We will use version control throughout WL2, so that all _entities_ (models, protocols and maybe even data sets) can have multiple versions.
 To this end, each entity will have its own GIT repository.
 
-**Point of action:** This GIT repo set-up makes everything very flexible, but also harder to learn. Should we discuss this with the community?
+**Point of action:** _This GIT repo set-up makes everything very flexible, but also harder to learn. Should we discuss this with the community?_
 
-**Question:** GIT is line-based, and so not great for XML formats. Should we do something about this?
+**Question:** _GIT is line-based, and so not great for XML formats. Should we do something about this?_
 
-**Question:** Should we create views of data sets including identifiers, annotation etc. but not the data and store those in GIT?
+**Question:** _Should we create views of data sets including identifiers, annotation etc. but not the data and store those in GIT?_
 
-**Question:** Jonathan, how do we combine GIT and COMBINE? Can the GIT repo be downloaded as a COMBINE archive? Or does it actually store one?
+**Question:** _Jonathan, how do we combine GIT and COMBINE? Can the GIT repo be downloaded as a COMBINE archive? Or does it actually store one?_
 
-**Question:** Should we start defining COMBINE sub-archives for our data types?
+**Question:** _Should we start defining COMBINE sub-archives for our data types?_
 
 ### Identifiers
 
 Every entity requires a unique identifier, which can be used to create links on the web site, but should also be accessible to fitting specifications and model and data annotations.
 These will take the form of a uniform resource identifier ([URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)), more specifically, a uniform resource locator ([URL](https://en.wikipedia.org/wiki/URL)).
 
-**Point of action:** Work out the details w.r.t. identifiers, versions, and (views of?) external entities.
+**Point of action:** _Work out the details w.r.t. identifiers, versions, and (views of?) external entities._
 
 
 
@@ -222,7 +222,7 @@ These will take the form of a uniform resource identifier ([URI](https://en.wiki
 
 We will allow all entities (models, protocols, data sets) to be either private, shared with a limited audience, or fully public.
 
-**Point of action:** What will the limited audience be? Groups etc.? Or simply logged in users or a big group of admin/power users? Should we start thinking about the case where even admins shouldn't have (easy) access to all data?
+**Point of action:** _What will the limited audience be? Groups etc.? Or simply logged in users or a big group of admin/power users? Should we start thinking about the case where even admins shouldn't have (easy) access to all data?_
 
 [Previous feedback on limited audience sharing](https://bitbucket.org/joncooper/fcweb/issues/68/allow-sharing-entities-with-specific-users) and [this](https://bitbucket.org/joncooper/fcweb/issues/107/allow-admins-to-unpublish-models) and [this](https://bitbucket.org/joncooper/fcweb/issues/108/give-users-some-way-to-request-new).
 
