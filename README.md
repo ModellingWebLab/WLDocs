@@ -31,7 +31,7 @@ In the current implementation, models are stored on the website, but we'd like t
 
 **Point of action:** _Collaborate with PMR so that we can access its models._
 
-The WL2 uses Git for version control of models and protocols: see [version_control](#version-control).
+The WL2 uses Git for version control of models and protocols: see [version control](#version-control).
 Where the reference copy is stored externally, the Web Lab will store a clone of the repository.
 
 
