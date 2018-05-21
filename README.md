@@ -31,6 +31,8 @@ In the current implementation, models are stored on the website, but we'd like t
 
 **Point of action:** _Collaborate with PMR so that we can access its models._
 
+The WL2 uses GIT for version control of models, protocols, and data sets: See #version_control.
+
 **Question:** Jon, how does this mesh with our git storage ideas? Would our _view_ of a model (e.g. an identifier, annotations, and a link to an external cellml source) be a locally version-controlled entity?
 
 ### Annotation
@@ -175,4 +177,18 @@ WL2 will include fitting, or _inference_ algorithms, e.g. derivative-free non-li
 Fitting takes a lot of processing power, especially when you do it repeatedly (which is often needed to test the quality of the fit).
 This means we'll probably need some sort of offline component for people to experiment with, after which users can upload a fitting spec and ask us to run it.
 
+
+
+
+## Version control
+
+We will use version control throughout WL2, so that all _entities_ (models, protocols and maybe even data sets) can have multiple versions.
+To this end, each entity will have its own GIT repository.
+
+### Identifiers
+
+Every entity requires a unique identifier, which can be used to create links on the web site, but should also be accessible to fitting specifications and model and data annotations.
+These will take the form of a uniform resource identifier ([URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)), more specifically, a uniform resource locator ([URL](https://en.wikipedia.org/wiki/URL)).
+
+**Point of action:** Work out the details w.r.t. identifiers, versions, and (views of?) external entities.
 
