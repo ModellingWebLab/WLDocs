@@ -22,9 +22,9 @@ A model is a system of ordinary differential equations (ODEs) that describes (so
 Most models describe either a single ionic current, or a set of currents plus the ionic diffusion mechanisms that give rise to the cellular action potential (AP).
 Some models also include other aspects such as signalling or contraction mechanics.
 
-Models are written in CellML.
+Models are written in [CellML 1.0 or 1.1](http://cellml.org/).
 
-In the current implementation, models are stored on the website, but we'd like to move to a situation where they're kept in external repositories, e.g. the Physiome Model Repository (PMR, also known as the CellML Model Repository).
+In the current implementation, models are stored on the website, but we'd like to move to a situation where they're kept in external repositories, e.g. the Physiome Model Repository (PMR, also known as the [CellML Model Repository](https://models.physiomeproject.org/cellml)).
 
 ### Annotation
 
@@ -34,12 +34,12 @@ Currently, annotation happens by modifying the CellML files.
 **Point of action**: decide whether to keep annotations inside the CellML files or use an external mechanism.
 External annotation is harder to work with, but more flexible as it allows us to annotate models not stored on our own servers.
 
-We currently use the `oxmeta` ontology, which is distributed as part of Chaste (https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl).
+We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl), which is distributed as part of Chaste .
 
 **Point of action**: We need to either find a community ontology, or work towards standardising our one (e.g. move from chaste to its own repo, get some input from others, given them access etc.).
 
-Note 1: There is also an rdf file: https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf
-Note 2: The XML namespace for the annotations is https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata (not a link!)
+Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
+Note 2: The XML namespace for the annotations is https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata (not a link!).
 
 ### Stimulus current
 
