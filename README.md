@@ -40,7 +40,7 @@ Where the reference copy is stored externally, the Web Lab will store a clone of
 Models are linked to protocols via an ontology that lists common model variables, e.g. the major currents (INa, ICaL, IKr, etc.) and their maximum conductances.
 Currently, annotation happens by modifying the CellML files.
 
-**Point of action:** _Decide whether to keep annotations inside the CellML files or use an external mechanism._
+**Almost settled:** _Decide whether to keep annotations inside the CellML files or use an external mechanism._
 _We probably want to allow both, so add the ability to read/write separate files containing annotations, for increased flexibility._
 _For performance, we will probably want to cache all annotations of everything the Web Lab knows in a [triplestore](https://en.wikipedia.org/wiki/Triplestore) of some kind._
 
@@ -115,7 +115,7 @@ WL2 needs the capability to display and process experimental data.
 
 The current prototypes use CSV data.
 
-**Point of action:** _We need to decide on a suitable free, easy-to-read exchange format._
+**Almost settled:** _We need to decide on a suitable free, easy-to-read exchange format._
 _CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors._
 _HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long)._
 _Perhaps people won't mind what we use, as long as we provide an export option on the website?_
@@ -124,6 +124,8 @@ _We can also compress CSV, of course._
 The current Python backend already uses HDF5.
 
 Some types of hosting (e.g. PhysioNet) come with their own format.
+
+There is [a Python package called Neo](https://github.com/NeuralEnsemble/python-neo) that aims to provide a unified interface to several electrophysiology formats.
 
 ### Annotation
 
@@ -203,29 +205,24 @@ To this end, each model and protocol will have its own Git repository.
 
 Git is not well suited to storing large datasets (and these also change less frequently) so instead for these (including simulation results) we just store the files (compressed) on disk, with metadata in the database.
 
-**Point of action:** _This Git repo set-up makes everything very flexible, but also harder to learn. Should we discuss this with the community?_
+- Note 1: This Git repo set-up makes everything very flexible, but also harder to learn.
 The web interface will hide the complexity from users that don't care, presenting just a linear list of versions.
-
-**Question:** _GIT is line-based, and so not great for XML formats. Should we do something about this?_
-It works well enough for XML, as it's text-based. For human diff'ing we'll provide a visualiser that understands the mathematics (BiVeS).
-
-**Question:** _Should we create views of data sets including identifiers, annotation etc. but not the data and store those in Git?_
-As mentioned above, the metadata we track at present is in the DB.
-
-**Question:** _Jonathan, how do we combine Git and COMBINE? Can the Git repo be downloaded as a COMBINE archive? Or does it actually store one?_
-A specific version of the repo can be downloaded as an archive, yes.
-
-**Question:** _Should we start defining COMBINE sub-archives for our data types?_
-I don't think we need to.
+- Note 2: GIT is line-based, and so not ideal for XML. It still works though! And for human diff'ing we'll provide a visualiser that understands the mathematics ([BiVeS](https://github.com/binfalse/BiVeS) and its [web interface](https://github.com/binfalse/BiVeS-WebApp)).
 
 ### Identifiers
 
-Every entity requires a unique identifier, which can be used to create links on the web site, but should also be accessible to fitting specifications and model and data annotations.
-These will take the form of a uniform resource identifier ([URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)), more specifically, a uniform resource locator ([URL](https://en.wikipedia.org/wiki/URL)).
+Every entity requires a unique identifier, which can be used to create links on the web site, but is also accessible to fitting specifications and model and data annotations.
+These take the form of a uniform resource identifier ([URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)), more specifically, a uniform resource locator ([URL](https://en.wikipedia.org/wiki/URL)).
+We currently have unique canonical URIs for each version of each entity type that Web Lab handles (see **todo, add link**).
 
-**Point of action:** _Work out the details w.r.t. identifiers, versions, and (views of?) external entities._
-We already have unique canonical URIs for each version of each entity type that Web Lab handles.
-What more is needed?
+
+
+
+## Combine archives
+
+Specific versions of Git repos for entities can be downloaded as COMBINE archives.
+We could define subtypes for this, but it's not strictly required.
+
 
 
 
@@ -238,12 +235,16 @@ We will allow all entities (models, protocols, data sets) to be either private, 
 [Previous feedback on limited audience sharing](https://bitbucket.org/joncooper/fcweb/issues/68/allow-sharing-entities-with-specific-users) and [this](https://bitbucket.org/joncooper/fcweb/issues/107/allow-admins-to-unpublish-models) and [this](https://bitbucket.org/joncooper/fcweb/issues/108/give-users-some-way-to-request-new).
 
 
+
+
 ## Comments and discussion
 
 At one point, we mentioned it would be nice to allow comments / discussion threads of all entities.
 I still like this idea!
 (Would have to refer to a repo though, not a version within a repo).
 This also ties in with "exposures", or homepages for each entity where users can see the different versions etc.
+
+
 
 
 ## REST API
