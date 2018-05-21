@@ -26,6 +26,8 @@ Models are written in [CellML 1.0 or 1.1](http://cellml.org/).
 
 In the current implementation, models are stored on the website, but we'd like to move to a situation where they're kept in external repositories, e.g. the Physiome Model Repository (PMR, also known as the [CellML Model Repository](https://models.physiomeproject.org/cellml)).
 
+**Point of action:** Collaborate with PMR so that we can access its models.
+
 ### Annotation
 
 Models are linked to protocols via an ontology that lists common model variables, e.g. the major currents (INa, ICaL, IKr, etc.) and their maximum conductances.
@@ -122,8 +124,25 @@ Further pre and post-processing currently happens via functional curation (see [
 
 ## Simulations
 
+### Loading and manipulating models
 
+Models will be read using our own CellML reading code, [cellmlmanip](https://github.com/ModellingWebLab/cellmlmanip), that reads CellML, creates [SymPy](http://sympy.org/) equations, and can manipulate them (e.g. adding a protocol-defined stimulus).
 
+**Point of action:** Asif is writing this.
 
+**Point of action:** Consider CellML 2.0 support.
 
+### Running simulations
+
+Currently, simulations can be run using either Chaste or a Cython back-end.
+
+**Point of action:** Replace this with a Cython-only back-end.
+
+## Fitting
+
+**Point of action:** Michael is co-writing Pints.
+
+**Point of action:** The current fitting specification uses model-specific variable annotations, we should experiment with model-agnostic versions instead
+
+**Point of action:** Depending on what we decide for the experimental protocol specification language, we need to either replace or extend Aidan's prototype code.
 
