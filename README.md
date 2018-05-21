@@ -42,6 +42,7 @@ Currently, annotation happens by modifying the CellML files.
 
 **Point of action:** _Decide whether to keep annotations inside the CellML files or use an external mechanism._
 _External annotation is harder to work with, but more flexible as it allows us to annotate models not stored on our own servers._
+_Last time we discussed, I think Jonathan was leaning towards using [triplestore](https://en.wikipedia.org/wiki/Triplestore) for everything?_
 
 We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl), which is distributed as part of Chaste .
 
@@ -106,6 +107,9 @@ The current prototypes use CSV data.
 **Point of action:** _We need to decide on a suitable free, easy-to-read exchange format._
 _CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors._
 _HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long)._
+_Perhaps people won't mind what we use, as long as we provide an export option on the website?_
+
+The current Python backend already uses HDF5.
 
 Some types of hosting (e.g. PhysioNet) come with their own format.
 
@@ -185,10 +189,28 @@ This means we'll probably need some sort of offline component for people to expe
 We will use version control throughout WL2, so that all _entities_ (models, protocols and maybe even data sets) can have multiple versions.
 To this end, each entity will have its own GIT repository.
 
+**Point of action:** This GIT repo set-up makes everything very flexible, but also harder to learn. Should we discuss this with the community?
+
+**Question:** GIT is line-based, and so not great for XML formats. Should we do something about this?
+
+**Question:** Should we create views of data sets including identifiers, annotation etc. but not the data and store those in GIT?
+
+**Question:** Jonathan, how do we combine GIT and COMBINE? Can the GIT repo be downloaded as a COMBINE archive? Or does it actually store one?
+
+**Question:** Should we start defining COMBINE sub-archives for our data types?
+
 ### Identifiers
 
 Every entity requires a unique identifier, which can be used to create links on the web site, but should also be accessible to fitting specifications and model and data annotations.
 These will take the form of a uniform resource identifier ([URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)), more specifically, a uniform resource locator ([URL](https://en.wikipedia.org/wiki/URL)).
 
 **Point of action:** Work out the details w.r.t. identifiers, versions, and (views of?) external entities.
+
+
+
+## Sharing control
+
+We will allow all entities (models, protocols, data sets) to be either private, shared with a limited audience, or fully public.
+
+**Point of action:** What will the limited audience be? Groups etc.? Or simply logged in users or a big group of admin/power users? Should we start thinking about the case where even admins shouldn't have (easy) access to all data?
 
