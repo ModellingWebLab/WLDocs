@@ -28,7 +28,7 @@ Models are written in [CellML 1.0 or 1.1](http://cellml.org/).
 
 In the current implementation, models are stored on the website, but we'd like to move to a situation where they're kept in external repositories, e.g. the Physiome Model Repository (PMR, also known as the [CellML Model Repository](https://models.physiomeproject.org/cellml)).
 
-**Point of action:** Collaborate with PMR so that we can access its models.
+**Point of action:** _Collaborate with PMR so that we can access its models._
 
 **Question:** Jon, how does this mesh with our git storage ideas? Would our _view_ of a model (e.g. an identifier, annotations, and a link to an external cellml source) be a locally version-controlled entity?
 
@@ -37,12 +37,12 @@ In the current implementation, models are stored on the website, but we'd like t
 Models are linked to protocols via an ontology that lists common model variables, e.g. the major currents (INa, ICaL, IKr, etc.) and their maximum conductances.
 Currently, annotation happens by modifying the CellML files.
 
-**Point of action**: decide whether to keep annotations inside the CellML files or use an external mechanism.
-External annotation is harder to work with, but more flexible as it allows us to annotate models not stored on our own servers.
+**Point of action:** _Decide whether to keep annotations inside the CellML files or use an external mechanism._
+_External annotation is harder to work with, but more flexible as it allows us to annotate models not stored on our own servers._
 
 We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl), which is distributed as part of Chaste .
 
-**Point of action**: We need to either find a community ontology, or work towards standardising our one (e.g. move from chaste to its own repo, get some input from others, given them access etc.).
+**Point of action:** _We need to either find a community ontology, or work towards standardising our one (e.g. move from chaste to its own repo, get some input from others, given them access etc.)._
 
 - Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
 - Note 2: The XML namespace for the annotations is https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata (not a link!).
@@ -68,7 +68,7 @@ This is inefficient during the systolic/refractory phase, where steps of over 10
 
 At the moment, protocols are written using the [Functional Curation syntax](https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration).
 
-**Point of action:** We need to decide whether to stick with this or come up with an easier-to-use alternative.
+**Point of action:** _We need to decide whether to stick with this or come up with an easier-to-use alternative._
 
 This might involve:
 
@@ -100,9 +100,9 @@ WL2 needs the capability to display and process experimental data.
 
 The current prototypes use CSV data.
 
-**Point of action:** We need to decide on a suitable free, easy-to-read exchange format.
-CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors.
-HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long).
+**Point of action:** _We need to decide on a suitable free, easy-to-read exchange format._
+_CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors._
+_HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long)._
 
 Some types of hosting (e.g. PhysioNet) come with their own format.
 
@@ -111,7 +111,7 @@ Some types of hosting (e.g. PhysioNet) come with their own format.
 Some formats (e.g. HDF5) support annotation, but others (CSV) don't.
 As with model annotation, we might also want to annotate files without modifying them, so again external annotation seems best.
 
-**Point of action:** Decide how to annotate data files (internal/external).
+**Point of action:** _Decide how to annotate data files (internal/external)._
 
 There is no ontology for experimental meta-data, but we really need one, so that users can perform structured queries to find data!
 The MICEE standard lists a bunch of things that should be stored _about_ experimental data.
@@ -122,7 +122,7 @@ The MICEE standard lists a bunch of things that should be stored _about_ experim
 
 ### Hosting
 
-**Point of action**: We need someone to host data (annotated) files!
+**Point of action:** _We need someone to host data (annotated) files!_
 
 Initially, we can do this locally.
 
@@ -143,24 +143,27 @@ Further pre and post-processing currently happens via functional curation (see [
 
 Models will be read using our own CellML reading code, [cellmlmanip](https://github.com/ModellingWebLab/cellmlmanip), that reads CellML, creates [SymPy](http://sympy.org/) equations, and can manipulate them (e.g. adding a protocol-defined stimulus).
 
-**Point of action:** Asif is writing this.
+**Point of action:** _Asif is writing this._
 
-**Point of action:** Consider CellML 2.0 support.
+**Point of action:** _Consider CellML 2.0 support._
+
+LibCellML is the planned new library for reading (but not manipulating) CellML 2.0 files.
+We've added Python bindings to it, and would like to use it eventually, provided it has real benefits over a simple plain-Python reader.
 
 ### Running simulations
 
 Currently, simulations can be run using either Chaste or a Cython back-end.
 
-**Point of action:** Replace this with a Cython-only back-end.
+**Point of action:** _Replace this with a Cython-only back-end._
 
 
 
 
 ## Fitting
 
-**Point of action:** Michael is co-writing Pints.
+**Point of action:** _Michael is co-writing Pints._
 
-**Point of action:** The current fitting specification uses model-specific variable annotations, we should experiment with model-agnostic versions instead
+**Point of action:** _The current fitting specification uses model-specific variable annotations, we should experiment with model-agnostic versions instead._
 
-**Point of action:** Depending on what we decide for the experimental protocol specification language, we need to either replace or extend Aidan's prototype code.
+**Point of action:** _Depending on what we decide for the experimental protocol specification language, we need to either replace or extend Aidan's prototype code._
 
