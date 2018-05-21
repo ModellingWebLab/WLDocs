@@ -50,7 +50,7 @@ We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/r
 
 - Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
 - Note 2: The XML namespace for the annotations is `https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata` (not a link! for historical reasons).
-- Note 3: [ICEPO](https://academic.oup.com/database/article/doi/10.1093/database/baw017/2630205) is an ontology of [_qualitative_ effects of mutations on ion channel function](ftp://ftp.nextprot.org/pub/current_release/controlled_vocabularies/cv_modification_effect.obo). 
+- Note 3: [ICEPO](https://academic.oup.com/database/article/doi/10.1093/database/baw017/2630205) is an ontology of _qualitative_ effects of mutations on ion channel function: ftp://ftp.nextprot.org/pub/current_release/controlled_vocabularies/cv_modification_effect.obo . 
 
 It would also be great to move beyond shared variable names, and start documenting model provenance, using _relations_ to (oxmeta?) variables, such as `is_parameter_for`.
 Once we have a way to reference our models and data sets, we should also be able to add _weak provenance data_, such as `ModelX:VariableY is_derived_from DataSetZ` or `ModelX:Component1 is_inherited_from ModelY:Component2` or `is_adapted_from`.
