@@ -2,6 +2,7 @@
 
 - [Click here for links to code, prototypes, and more information](links.md).
 - [Click here for the WL1/WL2/Web Lab terminology disambiguation](terminology.md).
+- [Click here for the Web Lab infrastructure documentation](infrastructure.md).
 
 _The following document describes the **intended** features of the new web lab (2018-05-21)._
 
@@ -161,9 +162,17 @@ Currently, simulations can be run using either Chaste or a Cython back-end.
 
 ## Fitting
 
+WL2 will include fitting, or _inference_ algorithms, e.g. derivative-free non-linear methods for optimisation, and methods to estimate parameter distributions in a Bayesian framework.
+
 **Point of action:** _Michael is co-writing Pints._
 
 **Point of action:** _The current fitting specification uses model-specific variable annotations, we should experiment with model-agnostic versions instead._
 
 **Point of action:** _Depending on what we decide for the experimental protocol specification language, we need to either replace or extend Aidan's prototype code._
+
+### Processing power
+
+Fitting takes a lot of processing power, especially when you do it repeatedly (which is often needed to test the quality of the fit).
+This means we'll probably need some sort of offline component for people to experiment with, after which users can upload a fitting spec and ask us to run it.
+
 
