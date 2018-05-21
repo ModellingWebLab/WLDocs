@@ -1,6 +1,6 @@
 # The Cardiac Electrophysiology Web Lab
 
-The following document describes the _intended_ features of the new web lab (2018-05-21).
+_The following document describes the *intended* features of the new web lab (2018-05-21)._
 
 ![A schematic overview of the cardiac electrophysiology web lab](img/overview.png)
 
