@@ -2,7 +2,8 @@
 
 _The following document describes the **intended** features of the new web lab (2018-05-21)._
 
-[Click here for links to code, prototypes, and more information](links.md).
+* [Click here for links to code, prototypes, and more information](links.md).
+* [Click here for the WL1/WL2/Web Lab terminology disambiguation](terminology.md).
 
 ![A schematic overview of the cardiac electrophysiology web lab](img/overview.png)
 
