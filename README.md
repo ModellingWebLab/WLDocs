@@ -1,1 +1,1 @@
-# (Cardiac Electrophysiology) Web Lab
+# The Cardiac Electrophysiology Web Lab
