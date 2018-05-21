@@ -31,9 +31,9 @@ In the current implementation, models are stored on the website, but we'd like t
 
 **Point of action:** _Collaborate with PMR so that we can access its models._
 
-The WL2 uses GIT for version control of models, protocols, and data sets: See #version_control.
+The WL2 uses Git for version control of models and protocols: see [version_control](#version-control).
+Where the reference copy is stored externally, the Web Lab will store a clone of the repository.
 
-**Question:** _Jon, how does this mesh with our git storage ideas? Would our **view** of a model (e.g. an identifier, annotations, and a link to an external cellml source) be a locally version-controlled entity?_
 
 ### Annotation
 
@@ -41,10 +41,10 @@ Models are linked to protocols via an ontology that lists common model variables
 Currently, annotation happens by modifying the CellML files.
 
 **Point of action:** _Decide whether to keep annotations inside the CellML files or use an external mechanism._
-_External annotation is harder to work with, but more flexible as it allows us to annotate models not stored on our own servers._
-_Last time we discussed, I think Jonathan was leaning towards using [triplestore](https://en.wikipedia.org/wiki/Triplestore) for everything?_
+_We probably want to allow both, so add the ability to read/write separate files containing annotations, for increased flexibility._
+_For perforamnce, we will probably want to cache all annotations of everything the Web Lab knows in a [triplestore](https://en.wikipedia.org/wiki/Triplestore) of some kind._
 
-We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl), which is distributed as part of Chaste .
+We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl), which is distributed as part of Chaste.
 
 **Point of action:** _We need to either find a community ontology, or work towards standardising our one (e.g. move from chaste to its own repo, get some input from others, given them access etc.)._
 
@@ -91,6 +91,7 @@ SED-ML is a community standard to describe experiments, but its capabilities are
 
 The Minimum Information About a Simulation Experiment (MIASE) project describes the minimum things that any standard encoding simulation experiments should contain.
 ([paper](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1001122) | [wiki](https://en.wikipedia.org/wiki/Minimum_information_about_a_simulation_experiment) | [website](http://co.mbine.org/standards/miase))
+It is not a format for representing experiments, however.
 
 ### Cardiac protocol library
 
@@ -118,6 +119,7 @@ The current prototypes use CSV data.
 _CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors._
 _HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long)._
 _Perhaps people won't mind what we use, as long as we provide an export option on the website?_
+_We can also compress CSV, of course._
 
 The current Python backend already uses HDF5.
 
@@ -146,7 +148,7 @@ Initially, we can do this locally.
 ### Pre and post-processing
 
 WL2 does _not_ include initial preprocessing such as capacitance artefact removal, leak correction, subtraction protocols etc.
-It _does_ include secondary preprocessing such as calculating IV curves from (clean up) current recordings.
+It _does_ include secondary preprocessing such as calculating IV curves from (cleaned up) current recordings.
 To allow initial preprocessing to be inspected and/or re-done, we would ideally store (1) cleaned up, annotated data in an approved exchange format, and (2) free-form raw data along with pre-processing code (e.g. proprietary data formats and matlab scripts).
 
 Further pre and post-processing currently happens via functional curation (see [Protocols](#protocols)).
@@ -164,7 +166,7 @@ Models will be read using our own CellML reading code, [cellmlmanip](https://git
 
 **Point of action:** _Consider CellML 2.0 support._
 
-LibCellML is the planned new library for reading (but not manipulating) CellML 2.0 files.
+[LibCellML](https://github.com/cellml/libcellml) is the planned new library for reading (but not manipulating) CellML 2.0 files.
 We've added Python bindings to it, and would like to use it eventually, provided it has real benefits over a simple plain-Python reader.
 
 ### Running simulations
@@ -196,18 +198,25 @@ This means we'll probably need some sort of offline component for people to expe
 
 ## Version control
 
-We will use version control throughout WL2, so that all _entities_ (models, protocols and maybe even data sets) can have multiple versions.
-To this end, each entity will have its own GIT repository.
+We will use version control throughout WL2, so that all _entities_ (models, protocols, data sets, results) can have multiple versions.
+To this end, each model and protocol will have its own Git repository.
 
-**Point of action:** _This GIT repo set-up makes everything very flexible, but also harder to learn. Should we discuss this with the community?_
+Git is not well suited to storing large datasets (and these also change less frequently) so instead for these (including simulation results) we just store the files (compressed) on disk, with metadata in the database.
+
+**Point of action:** _This Git repo set-up makes everything very flexible, but also harder to learn. Should we discuss this with the community?_
+The web interface will hide the complexity from users that don't care, presenting just a linear list of versions.
 
 **Question:** _GIT is line-based, and so not great for XML formats. Should we do something about this?_
+It works well enough for XML, as it's text-based. For human diff'ing we'll provide a visualiser that understands the mathematics (BiVeS).
 
-**Question:** _Should we create views of data sets including identifiers, annotation etc. but not the data and store those in GIT?_
+**Question:** _Should we create views of data sets including identifiers, annotation etc. but not the data and store those in Git?_
+As mentioned above, the metadata we track at present is in the DB.
 
-**Question:** _Jonathan, how do we combine GIT and COMBINE? Can the GIT repo be downloaded as a COMBINE archive? Or does it actually store one?_
+**Question:** _Jonathan, how do we combine Git and COMBINE? Can the Git repo be downloaded as a COMBINE archive? Or does it actually store one?_
+A specific version of the repo can be downloaded as an archive, yes.
 
 **Question:** _Should we start defining COMBINE sub-archives for our data types?_
+I don't think we need to.
 
 ### Identifiers
 
@@ -215,6 +224,8 @@ Every entity requires a unique identifier, which can be used to create links on 
 These will take the form of a uniform resource identifier ([URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)), more specifically, a uniform resource locator ([URL](https://en.wikipedia.org/wiki/URL)).
 
 **Point of action:** _Work out the details w.r.t. identifiers, versions, and (views of?) external entities._
+We already have unique canonical URIs for each version of each entity type that Web Lab handles.
+What more is needed?
 
 
 
