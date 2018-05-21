@@ -41,6 +41,10 @@ We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/r
 - Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
 - Note 2: The XML namespace for the annotations is https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata (not a link!).
 
+It would also be great to move beyond shared variable names, and start documenting model provenance, using _relations_ to (oxmeta?) variables, such as `is_parameter_for`.
+Once we have a way to reference our models and data sets, we should also be able to add _weak provenance data_, such as `ModelX:VariableY is_derived_from DataSetZ` or `ModelX:Component1 is_inherited_from ModelY:Component2` or `is_adapted_from`.
+The fitting specification (see **TODO**) will provide _strong provenance data_, in the form of a complete description of how to obtain a parameter value from a model, protocol, and data set.
+
 ### Stimulus current
 
 Typically, the CellML version of a model includes a stimulus current.
@@ -72,6 +76,23 @@ SED-ML is a community standard to describe experiments, but its capabilities are
 ## Experimental data
 
 WL2 needs the capability to display and process experimental data.
+
+### Format
+
+The current prototypes use CSV data.
+
+**Point of action:** We need to decide on a suitable free, easy-to-read exchange format.
+CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors.
+HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long).
+
+### Annotation
+
+Some formats (e.g. HDF5) support annotation, but others (CSV) don't.
+As with model annotation, we might also want to annotate files without modifying them, so again external annotation seems best.
+
+**Point of action:** Decide how to annotate data files (internal/external).
+
+
 
 ### Pre and post-processing
 
