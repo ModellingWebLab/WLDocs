@@ -65,12 +65,16 @@ At the moment, protocols are written using the [Functional Curation syntax](http
 This might involve:
 
 - Replacing FC with something procedural e.g. sandboxed Python (but then do we lose platform/tool independence?)
-- Coming up with tools that simplify working with FC (e.g. a Python/Myokit library that users can use procedurally, but that then generates FC code?
+- Coming up with tools that simplify working with FC (e.g. a Python/Myokit library that users can use procedurally, but that then generates FC code)
 
 ### SED-ML
 
 SED-ML is a community standard to describe experiments, but its capabilities are much more limited than functional curation
 
+### MIASE
+
+The Minimum Information About a Simulation Experiment (MIASE) project describes the minimum things that any standard encoding simulation experiments should contain.
+([paper](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1001122) | [wiki](https://en.wikipedia.org/wiki/Minimum_information_about_a_simulation_experiment) | [website](http://co.mbine.org/standards/miase))
 
 
 ## Experimental data
@@ -85,6 +89,8 @@ The current prototypes use CSV data.
 CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors.
 HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long).
 
+Some types of hosting (e.g. PhysioNet) come with their own format.
+
 ### Annotation
 
 Some formats (e.g. HDF5) support annotation, but others (CSV) don't.
@@ -92,7 +98,18 @@ As with model annotation, we might also want to annotate files without modifying
 
 **Point of action:** Decide how to annotate data files (internal/external).
 
+There is no ontology for experimental meta-data, but we really need one, so that users can perform structured queries to find data!
+The MICEE standard lists a bunch of things that should be stored _about_ experimental data.
 
+([paper](https://www.sciencedirect.com/science/article/pii/S0079610711000642))
+
+- Note 1: The [MICEE website](https://micee.org) seems to be offline.
+
+### Hosting
+
+**Point of action**: We need someone to host data (annotated) files!
+
+Initially, we can do this locally.
 
 ### Pre and post-processing
 
