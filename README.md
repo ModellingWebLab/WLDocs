@@ -16,6 +16,8 @@ The figure above shows the general outline of WL2.
 The individual components and their connections are described below.
 
 
+
+
 ## Models
 
 A model is a system of ordinary differential equations (ODEs) that describes (some aspects of) the electrophysiology (EP) of a cell, plus a physiologically viable set of initial states.
@@ -27,6 +29,8 @@ Models are written in [CellML 1.0 or 1.1](http://cellml.org/).
 In the current implementation, models are stored on the website, but we'd like to move to a situation where they're kept in external repositories, e.g. the Physiome Model Repository (PMR, also known as the [CellML Model Repository](https://models.physiomeproject.org/cellml)).
 
 **Point of action:** Collaborate with PMR so that we can access its models.
+
+**Question:** Jon, how does this mesh with our git storage ideas? Would our _view_ of a model (e.g. an identifier, annotations, and a link to an external cellml source) be a locally version-controlled entity?
 
 ### Annotation
 
@@ -58,6 +62,8 @@ Unless the solver somehow knows when these jumps are, simulations need to be run
 This is inefficient during the systolic/refractory phase, where steps of over 100ms could otherwise be made.
 
 
+
+
 ## Protocols
 
 At the moment, protocols are written using the [Functional Curation syntax](https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration).
@@ -77,6 +83,13 @@ SED-ML is a community standard to describe experiments, but its capabilities are
 
 The Minimum Information About a Simulation Experiment (MIASE) project describes the minimum things that any standard encoding simulation experiments should contain.
 ([paper](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1001122) | [wiki](https://en.wikipedia.org/wiki/Minimum_information_about_a_simulation_experiment) | [website](http://co.mbine.org/standards/miase))
+
+### Cardiac protocol library
+
+The current Functional Curation protocols rely on a cardiac specific and a cardiac-non-specific library of functions (written in FC syntax).
+If we continue down this road these need to be documented and stored somewhere as some kind of standard library.
+
+
 
 
 ## Experimental data
@@ -122,6 +135,8 @@ To allow initial preprocessing to be inspected and/or re-done, we would ideally 
 Further pre and post-processing currently happens via functional curation (see [Protocols](#protocols)).
 
 
+
+
 ## Simulations
 
 ### Loading and manipulating models
@@ -137,6 +152,9 @@ Models will be read using our own CellML reading code, [cellmlmanip](https://git
 Currently, simulations can be run using either Chaste or a Cython back-end.
 
 **Point of action:** Replace this with a Cython-only back-end.
+
+
+
 
 ## Fitting
 
