@@ -46,7 +46,7 @@ _For performance, we will probably want to cache all annotations of everything t
 
 We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl), which is distributed as part of Chaste.
 
-**Point of action:** _We need to either find a community ontology, or work towards standardising our one (e.g. move from chaste to its own repo, get some input from others, given them access etc.)._
+**Point of action:** _We need to either find a community ontology, or work towards standardising ours (e.g. move from chaste to its own repo, get some input from others, given them access etc.)._
 
 - Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
 - Note 2: The XML namespace for the annotations is `https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata` (not a link! for historical reasons).
