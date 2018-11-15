@@ -4,4 +4,4 @@ This document describes (or links to existing documentation of?) the infrastruct
 
 [Look here for issue tracking / project management](https://github.com/ModellingWebLab/project_issues/issues)
 
-The best description of the full infrastructure is currently given as an [Ansible configuration](https://github.com/ModellingWebLab/deployment)
+The best description of the full infrastructure is currently given as an [Ansible configuration](https://github.com/ModellingWebLab/deployment). There is an "ansible playbook" that can install the Web Lab for servers or locally, and load updates etc.
