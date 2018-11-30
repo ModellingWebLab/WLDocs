@@ -2,7 +2,8 @@
 
 - [Click here for links to code, prototypes, and more information](links.md).
 - [Click here for the WL1/WL2/Web Lab terminology disambiguation](terminology.md).
-- [Click here for the Web Lab infrastructure documentation](infrastructure.md).
+- [Click here for the generic Web Lab infrastructure documentation](infrastructure.md).
+- [Click here for the Cardiac Electrophysiology back-end implementation](implementation.md).
 
 _The following document describes the **intended** features of the new web lab (2018-05-21)._
 
