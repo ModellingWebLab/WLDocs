@@ -1,8 +1,8 @@
 # Cardiac Electrophysiology Web Lab implementation
 
 This document deals with the _implementation_ of the cardiac electrophysiology (CE) parts of the Web Lab (WL).
-For a description of the generic Web Lab implementation, see [infrastructure.md].
-For information on using the Cardiac Electrophysiology Web Lab (CEWL), see [README.md].
+For a description of the generic Web Lab implementation, see [here](infrastructure.md).
+For information on using the Cardiac Electrophysiology Web Lab (CEWL), see [here](README.md).
 
 
 ## Components
