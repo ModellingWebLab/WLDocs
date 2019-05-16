@@ -29,7 +29,11 @@ The django back-end can access data from various sources (databases, local files
 
 ### Database
 
+PostgreSQL?
+
 ### Git repositories
+
+Where are they located? What python module do we use to access them?
 
 ### Local file storages
 
