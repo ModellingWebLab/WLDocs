@@ -24,6 +24,8 @@ The website is written in Python using [Django](https://docs.djangoproject.com/e
 The Django server serves up a HTML and javascript front-end, which can interact with the Django server backend via a REST API.
 **JONATHAN: DID WE ADD ANYTHING HERE, OR IS THIS ALL HANDLED BY DJANGO?**
 
+The current Django application is slightly cardiac-specific, and is hosted in the [WebLab](https://github.com/ModellingWebLab/WebLab) repository.
+
 The django back-end can access data from various sources (databases, local files, git repositories, a metadata triple store), and can communicate with the "task queue" to execute experiments via a REST API.
 **JONATHAN: IS THIS API DOCUMENTED SOMEWHERE?**
 
@@ -41,7 +43,21 @@ Where are they located? What python module do we use to access them?
 
 ## Running experiments
 
-Experiments are run by placing them into a [Celery](http://docs.celeryproject.org/en/latest/index.html) task queue ([wiki](https://en.wikipedia.org/wiki/Celery_(software)).
+Experiments are run by calling a `cgi` script, that calls the `fc-runner` (see below).
+
+
+### FC-Runner
+
+The [fc-runner](https://github.com/ModellingWebLab/fc-runner) repository contains a CGI script that can be called by the Django front-end.
+It handles three tasks:
+
+- Determining a protocol interface (i.e. the variable annotations it requires)
+- Scheduling experiments
+- Cancelling scheduled experiments
+
+### Scheduling experiments
+
+Experiments are schedule by placing them into a [Celery](http://docs.celeryproject.org/en/latest/index.html) task queue ([wiki](https://en.wikipedia.org/wiki/Celery_(software)).
 One or multiple workers then take tasks from the queue and execute them.
 This way, the actual running of experiments can be offloaded to a cloud of worker machines.
 
@@ -49,11 +65,7 @@ The workers talk to the queue via a message passing system.
 Instead of talking to each other directly, messaging is handled via a *broker*, for which Web Lab uses [RabbitMQ](https://www.rabbitmq.com/documentation.html) ([wiki](https://en.wikipedia.org/wiki/RabbitMQ)).
 See also [Celery docs: Using RabbitMQ](http://docs.celeryproject.org/en/latest/getting-started/brokers/rabbitmq.html).
 
-### Cardiac web lab tasks
-
-The tasks that the Cardiac Electrophysiology Web Lab runs are defined in the [fc-runner] repository.
-
-More information is given [here](./infrastructure-cardiac.md).
+Further information is given [here](./infrastructure-cardiac.md).
 
 ## Deployment with Vagrant and Ansible
 
