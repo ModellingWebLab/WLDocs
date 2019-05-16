@@ -8,8 +8,6 @@ The best description of the full infrastructure is currently given as an [Ansibl
 
 The plans for the final set-up are given in [this presentation Jonathan prepared for Harmony 2018](https://github.com/ModellingWebLab/WLDocs/blob/master/doc/WL2%20technical%20detail.pdf)
 
-There's also this: ![this](img/infra-whiteboard.jpg)
-
 ## Getting started
 
 To get started practically, jump down to the deployment section **TODO: ADD LINK**
@@ -18,7 +16,7 @@ To get started practically, jump down to the deployment section **TODO: ADD LINK
 
 This diagram describes the general purpose Web Lab infrastructure.
 
-[!img/infra-1]
+![whiteboard with drawn overview](img/infra-1)
 
 ## Django website
 
@@ -47,6 +45,11 @@ The workers talk to the queue via a message passing system.
 Instead of talking to each other directly, messaging is handled via a *broker*, for which Web Lab uses [RabbitMQ](https://www.rabbitmq.com/documentation.html) ([wiki](https://en.wikipedia.org/wiki/RabbitMQ)).
 See also [Celery docs: Using RabbitMQ](http://docs.celeryproject.org/en/latest/getting-started/brokers/rabbitmq.html).
 
+### Cardiac web lab tasks
+
+The tasks that the Cardiac Electrophysiology Web Lab runs are defined in the [fc-runner] repository.
+
+More information is given [here](./infrastructure-cardiac.md).
 
 ## Deployment with Vagrant and Ansible
 
@@ -82,4 +85,7 @@ Sets up celery workers **How many? And all on the same machine?**
 
 ### Broker
 
+# Whiteboard
+
+There's also this: ![this](img/infra-whiteboard.jpg)
 
