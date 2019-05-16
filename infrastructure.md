@@ -16,7 +16,7 @@ To get started practically, jump down to the deployment section **TODO: ADD LINK
 
 This diagram describes the general purpose Web Lab infrastructure.
 
-![whiteboard with drawn overview](img/infra-1)
+![whiteboard with drawn overview](img/infra-1.png)
 
 ## Django website
 
