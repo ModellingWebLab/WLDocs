@@ -24,8 +24,6 @@ The Celery task to run experiments this is stored in the [fc-runner](https://git
 The task checks input from the web interface, and fires off the `fc` experiment.
 When completed, it packs up the results and sends them back to the web interface.
 
-**Should we rename it to `weblab-fc-runner` ??**
-
 ### FC
 
 The actual experiment running code is stored in the [weblab-fc](https://github.com/ModellingWebLab/weblab-fc) repository.
@@ -44,18 +42,15 @@ It:
   - Simulations are run in CVODE, using Cython to interface with it.
 - Executes the protocol
 
-
-**Concepts that need explaining:**
-
-- Expressions/statements/values
-- Protocol
-- Environment
-- Ranges (why are these in `fc.simulations` rather than `fc.language` ?)
+For more information, see [https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration/ProtocolSyntax].
 
 ## Web Lab without FC?
 
 At the start of the project, we discussed allowing arbitrary Python scripts, running in some kind of sandbox.
-**We should probably still look into this**, as users will want to implement their own pre- and post-processing methods, which at the moment is very hard and basically requires Jonathan to do it?
+We should probably still look into this, as users will want to implement their own pre- and post-processing methods, at least.
+
+Update: Jonathan says
+> This was not so much 'without FC' but extending FC to allow Python for post-processing etc not just the domain-specific language.
 
 ## Fitting
 

@@ -1,6 +1,6 @@
 # Web Lab infrastructure
 
-This document describes (or links to existing documentation of?) the infrastructure on which Web Labs (such as the Cardiac Electrophysiology one) run.
+This document describes (or links to existing documentation of) the infrastructure on which Web Labs (such as the Cardiac Electrophysiology Web Lab) run.
 
 [Look here for issue tracking / project management](https://github.com/ModellingWebLab/project_issues/issues)
 
@@ -10,7 +10,7 @@ The plans for the final set-up are given in [this presentation Jonathan prepared
 
 ## Getting started
 
-To get started practically, jump down to the deployment section **TODO: ADD LINK**
+To get started practically, jump down to the [deployment section](#deployment-with-vagrant-and-ansible).
 
 ## Overview
 
@@ -21,13 +21,32 @@ This diagram describes the general purpose Web Lab infrastructure.
 ## Django website
 
 The website is written in Python using [Django](https://docs.djangoproject.com/en/2.2/).
+The current Django application is slightly cardiac-specific, and is hosted in the [WebLab](https://github.com/ModellingWebLab/WebLab) repository.
+
+The django application can access data from various sources (databases, local files, git repositories, a metadata triple store), and can communicate with the "task queue" to execute experiments via a REST API.
+**JONATHAN: IS THIS API DOCUMENTED SOMEWHERE?**
+
+
+To make the Django application respond to HTTP requests, we use the `nginx` web server.
+Requests for static files are handled by `nginx` directly, other requests are passed to the Django server via `uwsgi`, which is a "WSGI" server (a bit like a CGI server).
+
+
+
+Django rus a 
 The Django server serves up a HTML and javascript front-end, which can interact with the Django server backend via a REST API.
 **JONATHAN: DID WE ADD ANYTHING HERE, OR IS THIS ALL HANDLED BY DJANGO?**
 
-The current Django application is slightly cardiac-specific, and is hosted in the [WebLab](https://github.com/ModellingWebLab/WebLab) repository.
 
-The django back-end can access data from various sources (databases, local files, git repositories, a metadata triple store), and can communicate with the "task queue" to execute experiments via a REST API.
-**JONATHAN: IS THIS API DOCUMENTED SOMEWHERE?**
+
+
+
+
+
+Yes. nginx is a web server (think equivalent of Apache but more lightweight). uwsgi is a WSGI server, which serves WSGI apps (Django in our case) - think faster CGI. Requests come in to nginx which responds directly if a static resource, or hands off to Django via uwsgi if not.
+
+The back-end fc-runner is also served via nginx, but this time it's an old-fashioned CGI app wrapped via fcgiwrap, since nginx doesn't do old-fashioned CGI natively.
+
+
 
 ### Database
 
@@ -73,7 +92,7 @@ Further information is given [here](./infrastructure-cardiac.md).
 For the WebLab, we use Vagrant to create and manage [VirtualBox](https://en.wikipedia.org/wiki/VirtualBox) machines, which are automatically set up for development or production using Ansible.
 Users can connect to running vagrant machines using ``$ vagrant ssh``.
 
-[Ansible](https://docs.ansible.com/) ([wiki](https://en.wikipedia.org/wiki/Ansible_(software))) is a tool to set up development environments, or deploy applications to some production environment.
+[Ansible](https://docs.ansible.com/) ([wiki](https://en.wikipedia.org/wiki/Ansible_(software))) is a tool to set up production (or development) environments.
 
 The WebLab [deployment](https://github.com/ModellingWebLab/deployment) repo contains several [Ansible playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html), which each set up some part of the WebLab infrastructure.
 Overlapping parts of playbooks are shared via [roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)).
@@ -89,7 +108,7 @@ Stored in `site.yml`, this is the main playbook, and does nothing other than sim
 ### Web servers
 
 Stored in `webservers.yml`, this sets up a Django server.
-**JONATHAN: Can there be more than one of these as the name suggests? How would they interact? Esp. given local files?**
+At the moment, there's only a single server, but we may want to consider more in the future e.g. for load balancing.
 
 ### Task Queue
 
