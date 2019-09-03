@@ -9,6 +9,41 @@ While some of these modules depend on each other, they are written to be relativ
 
 - Chaste users will get some kind of Python script that replaces `PyCml`, and has a nice command-line interface that lets you load a CellML model (via `cellmlmanip`), and then export it to any number of formats. The export step consists of (1) any required code manipulations (e.g. calculating a Jacobian with `cellmlmanip`) and (2) printing code, which may either be quite vanilla C++, or something more advanced e.g. with lookup tables (implemented in `weblab-cg`).
 
+## CellML annotation
+
+Models will be stored in CellML (version 1.0/1.1, but 2.0 before too long), with RDF annotations.
+
+A very short primer on CellML 1 is given [here](https://github.com/MichaelClerx/cellml-validation/tree/master/cellml_1_0), and more info + links to the specs and lots of tests can be found by browsing that repository.
+
+Annotations are defined by the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl).
+
+To annotate, variables in CellML 1 are assigned a `cmeta:id` attribute, with a model-wide unique name as its value.
+This `cmeta:id` is then reference in RDF tags, which link it to an oxmeta identifier.
+For example:
+
+    <model xmlns:cmeta="http://www.cellml.org/metadata/1.0#" ...
+    ...
+    <component ...
+      <variable name="time" public_interface="out" units="msc" cmeta:id="engine_time">
+      ...
+    </component>
+    ...
+    <rdf:RDF
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+            xmlns:oxmeta="https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata#"
+            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+        <rdf:Description rdf:about="#engine_time">
+            <bqbiol:is rdf:resource="https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata#time"/>
+        </rdf:Description>
+    </rdf>
+    </model>
+
+One detail to notice in the above description, is that the variable has a public interface of `out`, and no private interface.
+In other words, this component _defines_ the variable.
+In the current set-up, only the `<variable>` tag in the defining component can be used to annotate.
+(In CellML 2.0, this will no longer be possible, and we'll need a different strategy.)
+
 ## `cellmlmanip`
 
 [Cellmlmanip](https://github.com/ModellingWebLab/cellmlmanip) reads a CellML model, currently version 1.0/1.1, with plans for 2.0.
