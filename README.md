@@ -30,8 +30,6 @@ Models are written in [CellML 1.0 or 1.1](http://cellml.org/).
 
 In the current implementation, models are stored on the website, but we'd like to move to a situation where they're kept in external repositories, e.g. the Physiome Model Repository (PMR, also known as the [CellML Model Repository](https://models.physiomeproject.org/cellml)).
 
-**Point of action:** _Collaborate with PMR so that we can access its models._
-
 The WL2 uses Git for version control of models and protocols: see [version control](#version-control).
 Where the reference copy is stored externally, the Web Lab will store a clone of the repository.
 
@@ -41,13 +39,11 @@ Where the reference copy is stored externally, the Web Lab will store a clone of
 Models are linked to protocols via an ontology that lists common model variables, e.g. the major currents (INa, ICaL, IKr, etc.) and their maximum conductances.
 Currently, annotation happens by modifying the CellML files.
 
-**Almost settled:** _Decide whether to keep annotations inside the CellML files or use an external mechanism._
-_We probably want to allow both, so add the ability to read/write separate files containing annotations, for increased flexibility._
-_For performance, we will probably want to cache all annotations of everything the Web Lab knows in a [triplestore](https://en.wikipedia.org/wiki/Triplestore) of some kind._
+_The annotation mechanism may change, with annotations living inside the model and/or in a [triplestore](https://en.wikipedia.org/wiki/Triplestore)._
 
 We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl), which is distributed as part of Chaste.
 
-**Point of action:** _We need to either find a community ontology, or work towards standardising ours (e.g. move from chaste to its own repo, get some input from others, given them access etc.)._
+ _We'd like a community ontology, but seems best way to achieve this is to just do whatever we feel like and wait until there are enough other people who want this too_
 
 - Note 1: There is also an [rdf file](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.rdf).
 - Note 2: The XML namespace for the annotations is `https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata` (not a link! for historical reasons).
@@ -70,19 +66,11 @@ This is essential a default protocol, and so it can be argued this should not be
 Unless the solver somehow knows when these jumps are, simulations need to be run with a maximum step size of e.g. 1ms.
 This is inefficient during the systolic/refractory phase, where steps of over 100ms could otherwise be made.
 
-
-
-
 ## Protocols
 
-At the moment, protocols are written using the [Functional Curation syntax](https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration).
+Protocols are written using the [Functional Curation syntax](https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration).
 
-**Point of action:** _We need to decide whether to stick with this or come up with an easier-to-use alternative._
-
-This might involve:
-
-- Replacing FC with something procedural e.g. sandboxed Python (but then do we lose platform/tool independence?)
-- Coming up with tools that simplify working with FC (e.g. a Python/Myokit library that users can use procedurally, but that then generates FC code)
+_We might move some post-processing into sandboxed Python_
 
 ### SED-ML
 
@@ -115,12 +103,6 @@ WL2 needs the capability to display and process experimental data.
 ### Format
 
 The current prototypes use CSV data.
-
-**Almost settled:** _We need to decide on a suitable free, easy-to-read exchange format._
-_CSV is very easy to read, but bulky (25 bytes per float) and can suffer from rounding errors._
-_HDF5 is more compact and structured, but cannot be read/written without a special library (in theory it can, but the spec is 150 pages long)._
-_Perhaps people won't mind what we use, as long as we provide an export option on the website?_
-_We can also compress CSV, of course._
 
 The current Python backend already uses HDF5.
 
