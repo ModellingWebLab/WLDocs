@@ -1,4 +1,7 @@
-# Concepts - Cardiac Electrophysiology Web Lab
+# Concepts
+
+This page describes various concepts to do with the cardiac electrophysiology web lab.
+It's usually out of date (see various tickets etc.).
 
 ![A schematic overview of the cardiac electrophysiology web lab](img/overview.png)
 
@@ -23,7 +26,6 @@ In the current implementation, models are stored on the website, but we'd like t
 The WL2 uses Git for version control of models and protocols: see [version control](#version-control).
 Where the reference copy is stored externally, the Web Lab will store a clone of the repository.
 
-
 ### Annotation
 
 Models are linked to protocols via an ontology that lists common model variables, e.g. the major currents (INa, ICaL, IKr, etc.) and their maximum conductances.
@@ -39,26 +41,24 @@ We currently use the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/r
 - Note 2: The XML namespace for the annotations is `https://chaste.comlab.ox.ac.uk/cellml/ns/oxford-metadata` (not a link! for historical reasons).
 - Note 3: [ICEPO](https://academic.oup.com/database/article/doi/10.1093/database/baw017/2630205) is an ontology of _qualitative_ effects of mutations on ion channel function: ftp://ftp.nextprot.org/pub/current_release/controlled_vocabularies/cv_modification_effect.obo . 
 
+See e.g. 
+- https://github.com/ModellingWebLab/project_issues/issues/63
+- https://github.com/ModellingWebLab/project_issues/issues/64
+
 It would also be great to move beyond shared variable names, and start documenting model provenance, using _relations_ to (oxmeta?) variables, such as `is_parameter_for`.
 Once we have a way to reference our models and data sets, we should also be able to add _weak provenance data_, such as `ModelX:VariableY is_derived_from DataSetZ` or `ModelX:Component1 is_inherited_from ModelY:Component2` or `is_adapted_from`.
 The fitting specification (see #fitting) will provide _strong provenance data_, in the form of a complete description of how to obtain a parameter value from a model, protocol, and data set.
 
+See e.g.
+- https://github.com/ModellingWebLab/project_issues/issues/60
+- https://github.com/ModellingWebLab/project_issues/issues/63
+
 Linking models to annotated data would automatically solve the problem of annotating models with e.g. species info (we could even say things like "27% human" if the annotations were really complete).
 See [previous feedback](https://bitbucket.org/joncooper/fcweb/issues/99/sort-models-by-species).
 
-### Stimulus current
-
-Typically, the CellML version of a model includes a stimulus current.
-This is essential a default protocol, and so it can be argued this should not be part of a model.
-
-- Note 1: The same holds for physical constants and physiological parameters such as temperature or membrane area: in a modular set-up these should really not be part of the _cell_ model.
-- Note 2: In addition, most stimulus protocols are discontinuous, and consist of a small jump of 0.5, 1, or 2ms in a 1000ms period.
-Unless the solver somehow knows when these jumps are, simulations need to be run with a maximum step size of e.g. 1ms.
-This is inefficient during the systolic/refractory phase, where steps of over 100ms could otherwise be made.
-
 ## Protocols
 
-Protocols are written using the [Functional Curation syntax](https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration).
+Protocols are written using the [Functional Curation language](https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration), using [this syntax](https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration/ProtocolSyntax).
 
 _We might move some post-processing into sandboxed Python_
 
@@ -77,35 +77,25 @@ It is not a format for representing experiments, however.
 The current Functional Curation protocols rely on a cardiac specific and a cardiac-non-specific library of functions (written in FC syntax).
 If we continue down this road these need to be documented and stored somewhere as some kind of standard library.
 
-Previous feedback: [Importing partial protocols](https://bitbucket.org/joncooper/fcweb/issues/56/allow-import-of-protocols).
-
-### Visualisation
-
-Previous feedback: [It would be cool to (automatically?) generate flow diagrams for protocols.](https://bitbucket.org/joncooper/fcweb/issues/83/support-facilitate-richer-documentation-of).
-
-
-
-
 ## Experimental data
 
 WL2 needs the capability to display and process experimental data.
+See e.g. 
+- https://github.com/ModellingWebLab/WebLab/issues/29
 
 ### Format
 
 The current prototypes use CSV data.
 
-Some types of hosting (e.g. PhysioNet) come with their own format.
-
-There is [a Python package called Neo](https://github.com/NeuralEnsemble/python-neo) that aims to provide a unified interface to several electrophysiology formats.
-
 ### Annotation
 
-Some formats (e.g. HDF5) support annotation, but others (CSV) don't.
-As with model annotation, we might also want to annotate files without modifying them, so again external annotation seems best.
+See e.g.
+- https://github.com/ModellingWebLab/project_issues/issues/62
+- https://github.com/ModellingWebLab/project_issues/issues/63
+- https://github.com/ModellingWebLab/WebLab/issues/29
 
-**Point of action:** _Decide how to annotate data files (internal/external)._
+### MICEEE
 
-There is no ontology for experimental meta-data, but we really need one, so that users can perform structured queries to find data!
 The MICEE standard lists a bunch of things that should be stored _about_ experimental data.
 
 ([paper](https://www.sciencedirect.com/science/article/pii/S0079610711000642))
@@ -114,9 +104,7 @@ The MICEE standard lists a bunch of things that should be stored _about_ experim
 
 ### Hosting
 
-**Point of action:** _We need someone to host data (annotated) files!_
-
-Initially, we can do this locally.
+_We need someone to host data (annotated) files. Initially, we can do this locally_
 
 ### Pre and post-processing
 
@@ -126,18 +114,15 @@ To allow initial preprocessing to be inspected and/or re-done, we would ideally 
 
 Further pre and post-processing currently happens via functional curation (see [Protocols](#protocols)).
 
-
-
-
 ## Simulations
 
 ### Loading and manipulating models
 
 Models will be read using our own CellML reading code, [cellmlmanip](https://github.com/ModellingWebLab/cellmlmanip), that reads CellML, creates [SymPy](http://sympy.org/) equations, and can manipulate them (e.g. adding a protocol-defined stimulus).
 
-**Point of action:** _Asif is writing this._
+Next [weblab_cg](https://github.com/ModellingWebLab/weblab-cg) will use cellmlmanip to read CellML files and then print code for use with the web lab.
 
-**Point of action:** _Consider CellML 2.0 support._
+### LibCellML
 
 [LibCellML](https://github.com/cellml/libcellml) is the planned new library for reading (but not manipulating) CellML 2.0 files.
 We've added Python bindings to it, and would like to use it eventually, provided it has real benefits over a simple plain-Python reader.
@@ -145,40 +130,24 @@ We've added Python bindings to it, and would like to use it eventually, provided
 ### Running simulations
 
 Currently, simulations can be run using either Chaste or a Cython back-end.
-
-**Point of action:** _Replace this with a Cython-only back-end._
-
-
-
+Ultimately, we will only use [weblab_fc](https://github.com/ModellingWebLab/weblab-fc).
 
 ## Fitting
 
 WL2 will include fitting, or _inference_ algorithms, e.g. derivative-free non-linear methods for optimisation, and methods to estimate parameter distributions in a Bayesian framework.
 
-**Point of action:** _Michael is co-writing Pints._
-
-**Point of action:** _The current fitting specification uses model-specific variable annotations, we should experiment with model-agnostic versions instead._
-
-**Point of action:** _Depending on what we decide for the experimental protocol specification language, we need to either replace or extend Aidan's prototype code._
+This will happen using [PINTS](https://github.com/pints-team/pints).
 
 ### Processing power
 
 Fitting takes a lot of processing power, especially when you do it repeatedly (which is often needed to test the quality of the fit).
 This means we'll probably need some sort of offline component for people to experiment with, after which users can upload a fitting spec and ask us to run it.
 
-
-
-
 ## Version control
 
 We will use version control throughout WL2, so that all _entities_ (models, protocols, data sets, results) can have multiple versions.
 To this end, each model and protocol will have its own Git repository.
-
-Git is not well suited to storing large datasets (and these also change less frequently) so instead for these (including simulation results) we just store the files (compressed) on disk, with metadata in the database.
-
-- Note 1: This Git repo set-up makes everything very flexible, but also harder to learn.
-The web interface will hide the complexity from users that don't care, presenting just a linear list of versions.
-- Note 2: GIT is line-based, and so not ideal for XML. It still works though! And for human diff'ing we'll provide a visualiser that understands the mathematics ([BiVeS](https://github.com/binfalse/BiVeS) and its [web interface](https://github.com/binfalse/BiVeS-WebApp)).
+[BiVeS](https://github.com/binfalse/BiVeS) is used to compare model versions.
 
 ### Identifiers
 
@@ -186,45 +155,28 @@ Every entity requires a unique identifier, which can be used to create links on 
 These take the form of a uniform resource identifier ([URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)), more specifically, a uniform resource locator ([URL](https://en.wikipedia.org/wiki/URL)).
 We currently have unique canonical URIs for each version of each entity type that Web Lab handles (see **todo, add link**).
 
-
-
-
 ## Combine archives
 
 Specific versions of Git repos for entities can be downloaded as COMBINE archives.
 We could define subtypes for this, but it's not strictly required.
 
-
-
-
 ## Sharing control
 
 We will allow all entities (models, protocols, data sets) to be either private, shared with a limited audience, or fully public.
 
-**Point of action:** _What will the limited audience be? Groups etc.? Or simply logged in users or a big group of admin/power users? Should we start thinking about the case where even admins shouldn't have (easy) access to all data?_
-
-[Previous feedback on limited audience sharing](https://bitbucket.org/joncooper/fcweb/issues/68/allow-sharing-entities-with-specific-users) and [this](https://bitbucket.org/joncooper/fcweb/issues/107/allow-admins-to-unpublish-models) and [this](https://bitbucket.org/joncooper/fcweb/issues/108/give-users-some-way-to-request-new).
-
-
-
+See e.g.
+- https://github.com/ModellingWebLab/WebLab/issues/40
 
 ## Comments and discussion
 
 At one point, we mentioned it would be nice to allow comments / discussion threads of all entities.
-I still like this idea!
-(Would have to refer to a repo though, not a version within a repo).
-This also ties in with "exposures", or homepages for each entity where users can see the different versions etc.
 
-
-
+See e.g.
+- https://github.com/ModellingWebLab/WebLab/issues/61
 
 ## REST API
 
 WL1 provides a hidden [REST API](https://en.wikipedia.org/wiki/Representational_state_transfer) to allow other services to communicate with it.
-WL2 should keep this feature, but extend and document it.
-
-
-
-
-
+WL2 will keep this feature, but extend and document it.
+See the infrastructure page for details.
 
