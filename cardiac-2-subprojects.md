@@ -59,7 +59,7 @@ This will include:
 - Unit conversion
 - See e.g. https://github.com/ModellingWebLab/cellmlmanip/issues/21
 
-Cellmlmanip can read and preserve RDF variable annotations in oxmeta syntax.
+Cellmlmanip can read and preserve oxmeta variable annotations.
 
 ## `weblab_cg`
 
