@@ -20,59 +20,57 @@ This diagram describes the general purpose Web Lab infrastructure.
 
 ## Django website
 
-The website is written in Python using [Django](https://docs.djangoproject.com/en/2.2/).
+The website is written in Python using [Django](https://docs.djangoproject.com/en/1.11/).
 The current Django application is slightly cardiac-specific, and is hosted in the [WebLab](https://github.com/ModellingWebLab/WebLab) repository.
 
-The django application can access data from various sources (databases, local files, git repositories, a metadata triple store), and can communicate with the "task queue" to execute experiments via a REST API.
-**JONATHAN: IS THIS API DOCUMENTED SOMEWHERE?**
-
+The django application can access data from various sources (databases, local files, git repositories, a metadata triple store (not implemented yet)), and can communicate with the "task queue" to execute experiments via a [REST API](https://github.com/ModellingWebLab/WebLab/blob/master/docs/experiment_runner_rest_api.md).
 
 To make the Django application respond to HTTP requests, we use the `nginx` web server.
 Requests for static files are handled by `nginx` directly, other requests are passed to the Django server via `uwsgi`, which is a "WSGI" server (a bit like a CGI server).
 
-
-
-Django rus a 
 The Django server serves up a HTML and javascript front-end, which can interact with the Django server backend via a REST API.
-**JONATHAN: DID WE ADD ANYTHING HERE, OR IS THIS ALL HANDLED BY DJANGO?**
 
+### nginx and uwsgi
 
-
-
-
-
-
-Yes. nginx is a web server (think equivalent of Apache but more lightweight). uwsgi is a WSGI server, which serves WSGI apps (Django in our case) - think faster CGI. Requests come in to nginx which responds directly if a static resource, or hands off to Django via uwsgi if not.
+nginx is a web server (think equivalent of Apache but more lightweight). 
+uwsgi is a WSGI server, which serves WSGI apps (Django in our case) - think faster CGI.
+Requests come in to nginx which responds directly if a static resource, or hands off to Django via uwsgi if not.
 
 The back-end fc-runner is also served via nginx, but this time it's an old-fashioned CGI app wrapped via fcgiwrap, since nginx doesn't do old-fashioned CGI natively.
 
-
-
 ### Database
 
-PostgreSQL?
+PostgreSQL.
+Gets created by the Ansible deployment (including setting up a DB user for access) and the schema is defined by Django.
 
 ### Git repositories
 
-Where are they located? What python module do we use to access them?
+Stored in Django's data dir, path defined in `config/settings` in `REPO_BASE`.
+
+Accessed with [gitpython](https://gitpython.readthedocs.io/en/stable/reference.html) via `entities/repository.py`.
 
 ### Local file storages
 
+Used for datasets and predictions. Again the location is defined in Django settings (`DATASETS_BASE` and `EXPERIMENT_BASE` respectively).
+
 ### Triple store
+
+Not yet implemented; will contain a copy of metadata associated with models, datasets, etc. to support searching; also the 'metadata interface' of protocols to support determining compatibility.
 
 ## Running experiments
 
-Experiments are run by calling a `cgi` script, that calls the `fc-runner` (see below).
-
+Happens via a task queue, communicated with via a REST API.
 
 ### FC-Runner
 
 The [fc-runner](https://github.com/ModellingWebLab/fc-runner) repository contains a CGI script that can be called by the Django front-end.
-It handles three tasks:
+
+It handles these tasks:
 
 - Determining a protocol interface (i.e. the variable annotations it requires)
 - Scheduling experiments
 - Cancelling scheduled experiments
+- Checking the protocol's syntax for correctness (results will be displayed by the front-end)
 
 ### Scheduling experiments
 
@@ -112,13 +110,15 @@ At the moment, there's only a single server, but we may want to consider more in
 
 ### Task Queue
 
-**NOT 100% sure. Does this define a queue on disk somewhere, or does it start a daemon?**
+Sets up the non-worker parts of celery (basically just checking out the repo), and the fc-runner REST web service (configuring nginx etc).
 
 ### Workers
 
-Sets up celery workers **How many? And all on the same machine?**
+Sets up celery workers, using configuration from `group_vars` and defaults for the roles.
 
 ### Broker
+
+Sets up rabbitmq
 
 # Whiteboard
 
