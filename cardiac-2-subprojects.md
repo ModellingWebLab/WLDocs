@@ -88,7 +88,7 @@ Unlike Python files, Cython-files need to be compiled, which happens partly stat
 - Generates model-specific Python code (extending the `fc` `AbstractModel` class) that can run simulations.
 For more information, see [https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration/ProtocolSyntax].
 
-### Fitting
+## `PINTS`
 
 Fitting will be handled using [PINTS](https://github.com/pints-team/pints).
 Probably some part of FC will have to learn how to call PINTS.
