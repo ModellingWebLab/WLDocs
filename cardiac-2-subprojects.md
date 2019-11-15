@@ -61,6 +61,17 @@ This will include:
 
 Cellmlmanip can read and preserve oxmeta variable annotations.
 
+### Unit conversion principles
+
+(The text in this section is adapted from Jonathan's comments [here](https://github.com/ModellingWebLab/cellmlmanip/issues/77))
+
+- cellmlmanip should provide a general approach to adding conversions at model/world interfaces (whether the 'world' is Chaste or a WL protocol)
+- It will do so by adding a new variable in the units desired by the world (if these are different from the model's units), transferring RDF annotations to the new variable (by just moving the cmeta:id in XML terms), and adding/changing equations as necessary so the new variable behaves appropriately.
+- Inputs and outputs are with reference to the model. So an 'input' is when the world wants to change a model variable; 'output' is when the world wants to read a model variable.
+- Only state variables, literal constants, or the free variable can be inputs.
+- Any variable can be an output.
+
+
 ## `weblab_cg`
 
 [Weblab CG](https://github.com/ModellingWebLab/weblab-cg) accepts a `cellmlmanip` model as input, and then spits out code in any number of formats.
