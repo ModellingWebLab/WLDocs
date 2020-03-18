@@ -42,7 +42,7 @@ WL1 Code
 Functional curation (FC)
 
 * Wiki: https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration
-** Syntax: https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration/ProtocolSyntax
+  * Syntax: https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration/ProtocolSyntax
 * Code: https://chaste.cs.ox.ac.uk/trac/browser/chaste/projects/FunctionalCuration
 * Oxmeta ontology: https://github.com/ModellingWebLab/ontologies/blob/master/oxford-metadata.ttl
 
