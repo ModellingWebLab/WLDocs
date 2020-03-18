@@ -44,7 +44,7 @@ Functional curation (FC)
 * Wiki: https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration
 ** Syntax: https://chaste.cs.ox.ac.uk/trac/wiki/FunctionalCuration/ProtocolSyntax
 * Code: https://chaste.cs.ox.ac.uk/trac/browser/chaste/projects/FunctionalCuration
-* Oxmeta ontology: https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl
+* Oxmeta ontology: https://github.com/ModellingWebLab/ontologies/blob/master/oxford-metadata.ttl
 
 ## Papers
 
