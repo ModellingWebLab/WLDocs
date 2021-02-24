@@ -4,11 +4,15 @@
 
 This document describes (or links to existing documentation of) the infrastructure on which Web Labs (such as the Cardiac Electrophysiology Web Lab) run.
 
+Briefly, the [Web Lab]() front-end is a Django website which communicates with a [Functional Curation]() back-end via 
+
 [Look here for issue tracking / project management](https://github.com/ModellingWebLab/project_issues/issues)
 
 The best description of the full infrastructure is currently given as an [Ansible configuration](https://github.com/ModellingWebLab/deployment). There is an "ansible playbook" that can install the Web Lab for servers or locally, and load updates etc.
 
 The plans for the final set-up are given in [this presentation Jonathan prepared for Harmony 2018](https://github.com/ModellingWebLab/WLDocs/blob/master/doc/WL2%20technical%20detail.pdf)
+
+There's also this: ![this](img/infra-whiteboard.jpg)
 
 ## Getting started
 
@@ -20,7 +24,7 @@ This diagram describes the general purpose Web Lab infrastructure.
 
 ![schematic overview](img/infra-1.png)
 
-## Django website
+## WebLab :: Django website (Front-end)
 
 The website is written in Python using [Django](https://docs.djangoproject.com/en/1.11/).
 The current Django application is slightly cardiac-specific, and is hosted in the [WebLab](https://github.com/ModellingWebLab/WebLab) repository.
@@ -59,7 +63,7 @@ Used for datasets and predictions. Again the location is defined in Django setti
 
 Not yet implemented; will contain a copy of metadata associated with models, datasets, etc. to support searching; also the 'metadata interface' of protocols to support determining compatibility.
 
-## Running experiments
+## Task-runner (communication from front to back-end)
 
 Happens via a task queue, communicated with via a REST API.
 
@@ -86,7 +90,11 @@ See also [Celery docs: Using RabbitMQ](http://docs.celeryproject.org/en/latest/g
 
 Further information is given [here](./infrastructure-cardiac.md).
 
-## Deployment with Vagrant and Ansible
+## Functional Curation (back-end)
+
+Todo.
+
+## Deployment (using Vagrant and Ansible)
 
 [Vagrant](https://www.vagrantup.com/docs/index.html) ([wiki](https://en.wikipedia.org/wiki/Vagrant_%28software%29)) is a tool for "building and maintaining virtual software development environments".
 For the WebLab, we use Vagrant to create and manage [VirtualBox](https://en.wikipedia.org/wiki/VirtualBox) machines, which are automatically set up for development or production using Ansible.
@@ -121,8 +129,3 @@ Sets up celery workers, using configuration from `group_vars` and defaults for t
 ### Broker
 
 Sets up rabbitmq
-
-# Whiteboard
-
-There's also this: ![this](img/infra-whiteboard.jpg)
-
