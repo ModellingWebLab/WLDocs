@@ -4,7 +4,7 @@
 
 This document describes (or links to existing documentation of) the infrastructure on which Web Labs (such as the Cardiac Electrophysiology Web Lab) run.
 
-Briefly, the [Web Lab]() front-end is a Django website which communicates with a [Functional Curation]() back-end via 
+Briefly, the [Web Lab](https://github.com/ModellingWebLab/WebLab) front-end is a Django website which communicates with a [Functional Curation](https://github.com/ModellingWebLab/weblab-fc) back-end via a task queue implemented in [rcrunner (aka fcws)](https://github.com/ModellingWebLab/fc-runner).
 
 [Look here for issue tracking / project management](https://github.com/ModellingWebLab/project_issues/issues)
 
