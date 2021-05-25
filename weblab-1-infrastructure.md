@@ -4,15 +4,15 @@
 
 This document describes (or links to existing documentation of) the infrastructure on which Web Labs (such as the Cardiac Electrophysiology Web Lab) run.
 
-Briefly, the [Web Lab](https://github.com/ModellingWebLab/WebLab) front-end is a Django website which communicates with a [Functional Curation](https://github.com/ModellingWebLab/weblab-fc) back-end via a task queue implemented in [rcrunner (aka fcws)](https://github.com/ModellingWebLab/fc-runner).
-
-[Look here for issue tracking / project management](https://github.com/ModellingWebLab/project_issues/issues)
+Briefly, the [Web Lab](https://github.com/ModellingWebLab/WebLab) front-end is a Django website which communicates with a ["Functional Curation"](https://github.com/ModellingWebLab/weblab-fc) back-end via a task queue implemented in ["fc-runner" (aka fcws)](https://github.com/ModellingWebLab/fc-runner).
 
 The best description of the full infrastructure is currently given as an [Ansible configuration](https://github.com/ModellingWebLab/deployment). There is an "ansible playbook" that can install the Web Lab for servers or locally, and load updates etc.
 
 The plans for the final set-up are given in [this presentation Jonathan prepared for Harmony 2018](https://github.com/ModellingWebLab/WLDocs/blob/master/doc/WL2%20technical%20detail.pdf)
 
 There's also this: ![this](img/infra-whiteboard.jpg)
+
+[Project-wide issues (not tied to any specific component) go here](https://github.com/ModellingWebLab/project_issues/issues)
 
 ## Getting started
 
