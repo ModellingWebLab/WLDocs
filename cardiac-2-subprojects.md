@@ -17,7 +17,7 @@ Models will be stored in CellML (version 1.0/1.1, but 2.0 before too long), with
 
 A very short primer on CellML 1 is given [here](https://github.com/MichaelClerx/cellml-validation/tree/master/cellml_1_0), and more info + links to the specs and lots of tests can be found by browsing that repository.
 
-Annotations are defined by the [`oxmeta` ontology](https://github.com/Chaste/Chaste/blob/release/python/pycml/oxford-metadata.ttl).
+Annotations are defined by the [`oxmeta` ontology](https://github.com/ModellingWebLab/ontologies).
 
 To annotate, variables in CellML 1 are assigned a `cmeta:id` attribute, with a model-wide unique name as its value.
 This `cmeta:id` is then reference in RDF tags, which link it to an oxmeta identifier.
